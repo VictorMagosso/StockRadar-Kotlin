@@ -14,3 +14,4 @@
 .cxx
 local.properties
 /constants
+/app/src/main/java/com/victor/stockradar/constants/Constants.kt
