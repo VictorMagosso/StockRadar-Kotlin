@@ -14,4 +14,6 @@ data class Stock(
     val price: String,
     @Expose
     val symbol: String,
+    @Expose
+    val change_percent: String
     )

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/backgroundDark"
     android:padding="15dp"
     tools:context=".MainActivity">
 
@@ -11,76 +12,158 @@
         android:id="@+id/txtStock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="-"
+        android:text="- - - - 0"
+        android:textColor="#ffffff"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnChooseStock" />
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <EditText
-        android:id="@+id/editStockCode"
-        android:layout_width="0dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="41dp"
-        android:ems="10"
-        android:hint="ITSA4"
-        android:inputType="textPersonName"
+        android:layout_marginTop="30dp"
+        app:endIconDrawable="@drawable/ic_dropdowncustom"
+        app:endIconMode="dropdown_menu"
+        app:endIconTint="#fff"
+        app:hintAnimationEnabled="false"
+        app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <AutoCompleteTextView
+            android:id="@+id/editStockCode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/edit_text_background"
+            android:drawableStart="@drawable/icon_chart"
+            android:gravity="center"
+            android:hint="ITSA4"
+            android:inputType="textAutoComplete"
+            android:textAllCaps="true"
+            android:textColor="#fff"
+            android:textColorHint="#B5B5B5"
+            android:textSize="24sp">
+
+        </AutoCompleteTextView>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnChooseStock"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#3F51B5"
-        android:backgroundTint="#3F51B5"
-        android:backgroundTintMode="src_over"
+        android:layout_marginTop="12dp"
+        android:background="?attr/buttonSearchStock"
         android:hapticFeedbackEnabled="false"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:text="OK"
+        app:backgroundTint="#00FFFFFF"
+        app:backgroundTintMode="src_over"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editStockCode" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
     <TextView
         android:id="@+id/txtPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:text="R$"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtStock" />
+        android:textColor="#ffffff"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtCompanyName"
+        app:layout_constraintEnd_toEndOf="@+id/btnChooseStock"
+        app:layout_constraintTop_toTopOf="@+id/txtCompanyName" />
 
     <TextView
         android:id="@+id/txtCompanyName"
-        android:layout_width="wrap_content"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:text="-"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPrice" />
+        android:textColor="#ffffff"
+        app:layout_constraintBottom_toBottomOf="@+id/txtStock"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/txtStock" />
 
     <TextView
         android:id="@+id/txtDescription"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:textColor="#ffffff"
+        app:layout_constraintStart_toStartOf="@+id/txtStock"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/txtStockVariation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 %"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:gravity="center"
-        android:text="-"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCompanyName" />
+        android:text="Código"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/btnChooseStock"
+        app:layout_constraintTop_toBottomOf="@+id/btnChooseStock" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:text="Descrição"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/btnChooseStock"
+        app:layout_constraintTop_toBottomOf="@+id/txtStock" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="15dp"
+        android:text="Empresa"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/txtStock"
+        app:layout_constraintTop_toBottomOf="@+id/btnChooseStock" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Preço atual"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="@+id/btnChooseStock"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Variação diária (%)"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="@+id/btnChooseStock" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
