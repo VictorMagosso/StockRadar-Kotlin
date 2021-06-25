@@ -10,4 +10,6 @@
 
     <color name="buttonSearchStock">#157CCD</color>
     <color name="backgroundDark">#151515</color>
+    <color name="titleColor">#5391DA</color>
+    <color name="cardTextColor">#90B6E2</color>
 </resources>

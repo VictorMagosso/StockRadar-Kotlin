@@ -10,4 +10,7 @@ class StockRepository {
     suspend fun getStock(stockCode: String): Response<ApiResponse> {
         return RetrofitConfig().stockService().getStock(stockCode)
     }
+    fun insertStock(stockCode: String) {
+
+    }
 }

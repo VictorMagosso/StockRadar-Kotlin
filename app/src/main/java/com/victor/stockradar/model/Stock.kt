@@ -15,5 +15,6 @@ data class Stock(
     @Expose
     val symbol: String,
     @Expose
-    val change_percent: String
+    val change_percent: String,
+    var isExpanded: Boolean = false
     )

@@ -3,5 +3,7 @@
     <declare-styleable name="ds">
         <attr name="buttonSearchStock" format="color"/>
         <attr name="backgroundDark" format="color"/>
+        <attr name="titleColor" format="color"/>
+        <attr name="cardTextColor" format="color"/>
     </declare-styleable>
 </resources>

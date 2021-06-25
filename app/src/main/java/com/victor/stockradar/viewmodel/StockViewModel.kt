@@ -12,7 +12,7 @@ import retrofit2.Response
 class StockViewModel(private val repository: StockRepository): ViewModel() {
     val stockResponse: MutableLiveData<Response<ApiResponse>> = MutableLiveData()
 
-    fun getFund(fundName: String) {
+    suspend fun getFund(fundName: String) {
         viewModelScope.launch{
             val response: Response<ApiResponse> = repository.getStock(fundName)
             stockResponse.value = response
