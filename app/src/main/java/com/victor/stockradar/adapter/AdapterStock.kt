@@ -10,7 +10,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.victor.stockradar.R
 import com.victor.stockradar.model.Stock
-import java.text.NumberFormat
 
 class AdapterStock(
     private val list: MutableList<Stock>

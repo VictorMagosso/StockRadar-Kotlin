@@ -43,19 +43,15 @@ class MainActivity : AppCompatActivity() {
         val stockVariation = findViewById<TextView>(R.id.txtStockVariation)
         val editStock = findViewById<EditText>(R.id.editStockCode)
         val btnChooseStock = findViewById<Button>(R.id.btnChooseStock)
+        val btnAddToRadar = findViewById<Button>(R.id.btnAddToRadar)
         val resultLayout = findViewById<ConstraintLayout>(R.id.resultLayout)
         val notFoundLayout = findViewById<RelativeLayout>(R.id.notFoundLayout)
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
         val rvStocks = findViewById<RecyclerView>(R.id.rvMyStocks)
 
-        val mockList = mutableListOf<Stock>()
+        val stockList = mutableListOf<Stock>()
 
-        mockList.add(Stock("Neogrid", "Neogrid S.A.", "Descricao descircao da neogrid so cai meu Deus", "11.50", "NGRD3", "7%"))
-        mockList.add(Stock("Neogrid", "Neogrid S.A.", "Descricao descircao da neogrid so cai meu Deus", "11.50", "NGRD3", "7%"))
-        mockList.add(Stock("Neogrid", "Neogrid S.A.", "Descricao descircao da neogrid so cai meu Deus", "11.50", "NGRD3", "7%"))
-        mockList.add(Stock("Neogrid", "Neogrid S.A.", "Descricao descircao da neogrid so cai meu Deus", "11.50", "NGRD3", "7%"))
-
-        val adapterStock = AdapterStock(mockList)
+        val adapterStock = AdapterStock(stockList)
         val linearLayoutManager = LinearLayoutManager(this)
 
         rvStocks.apply {
@@ -83,6 +79,28 @@ class MainActivity : AppCompatActivity() {
 
         val viewModelFactory = StockViewModelFactory(StockRepository())
         viewModel = ViewModelProvider(this, viewModelFactory).get(StockViewModel::class.java)
+
+        viewModel.getStocks(this)
+        viewModel.stocks.observe(this, {
+            it.forEach {
+                scope.launch {
+                    viewModel.getFund(it)
+                    val s = viewModel.stockResponse
+                        .value?.body()?.results?.get(it)
+
+                    val stockToAdd = Stock(
+                        name = s?.name!!,
+                        description = s.description,
+                        price = s.price,
+                        change_percent = s.change_percent,
+                        company_name = s.company_name,
+                        symbol = s.symbol
+                    )
+                    stockList.add(stockToAdd)
+                }
+            }
+            adapterStock.updateList(stockList)
+        })
 
         val items = stocksSuggestions
         val adapter = ArrayAdapter(this, R.layout.list_item, items)
@@ -119,6 +137,33 @@ class MainActivity : AppCompatActivity() {
                 })
             } else {
                 Toast.makeText(this, "Você precisa escolher uma ação", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        btnAddToRadar.setOnClickListener {
+            if (stockCompanyName.text.isNotEmpty()) {
+                try {
+                    viewModel.insertStock(this, editStock.text.toString())
+                    scope.launch {
+                        viewModel.getFund(editStock.text.toString())
+                        val s = viewModel.stockResponse
+                            .value?.body()?.results?.get(editStock.text.toString())
+
+                        val stockToAdd = Stock(
+                            name = s?.name!!,
+                            description = s.description,
+                            price = s.price,
+                            change_percent = s.change_percent,
+                            company_name = s.company_name,
+                            symbol = s.symbol
+                        )
+                        stockList.add(stockToAdd)
+                    }
+                    adapterStock.updateList(stockList)
+                    Toast.makeText(this, "Adicionado!", Toast.LENGTH_SHORT).show()
+                } catch (e: Exception) {
+                    Toast.makeText(this, "Algo deu errado: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
